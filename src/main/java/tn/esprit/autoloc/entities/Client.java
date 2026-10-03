@@ -3,12 +3,14 @@ package tn.esprit.autoloc.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = "reservations")
 public class Client {
 
     @Id
@@ -21,4 +23,6 @@ public class Client {
     private String telephone;
     private String numPermis;
     private LocalDate dateInscription;
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<Reservation> reservations;
 }

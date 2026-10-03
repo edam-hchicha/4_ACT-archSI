@@ -1,19 +1,19 @@
 package tn.esprit.autoloc.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = {"employes", "vehicules"})
 public class Agence {
 
     @Id
@@ -24,4 +24,9 @@ public class Agence {
     private String ville;
     private String adresse;
     private String telephone;
+    @OneToMany(mappedBy = "agence",cascade = CascadeType.ALL)
+    private List<Employe> employes;
+    @OneToMany(mappedBy = "agence",cascade = CascadeType.ALL)
+    private List<Vehicule> vehicules;
+
 }

@@ -9,6 +9,7 @@ import tn.esprit.autoloc.entities.enums.RoleEmploye;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = "agence")
 public class Employe {
 
     @Id
@@ -20,4 +21,7 @@ public class Employe {
 
     @Enumerated(EnumType.STRING)
     private RoleEmploye role;
+    @ManyToOne
+    @JoinColumn(name = "id_agence")
+    private Agence agence;
 }
