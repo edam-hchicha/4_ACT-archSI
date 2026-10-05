@@ -6,12 +6,16 @@ import tn.esprit.autoloc.entities.enums.CategorieVehicule;
 import tn.esprit.autoloc.entities.enums.StatutVehicule;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+
 @ToString(exclude = {"agence", "equipements", "reservations"})
+
 public class Vehicule {
 
     @Id
@@ -30,7 +34,7 @@ public class Vehicule {
     @Enumerated(EnumType.STRING)
     private StatutVehicule statut;
     @ManyToOne
-    @JoinColumn(name = "id_agence")
+
     private Agence agence;
     @ManyToMany
     @JoinTable(
@@ -38,8 +42,8 @@ public class Vehicule {
             joinColumns = @JoinColumn(name = "id_vehicule"),
             inverseJoinColumns = @JoinColumn(name = "id_equipement")
     )
-    private List<Equipement> equipements;
-    @OneToMany(mappedBy = "vehicule", cascade = CascadeType.ALL)
-    private List<Reservation> reservations;
+    private Set<Equipement> equipements;
+    @OneToMany(mappedBy = "vehicule", cascade = CascadeType.PERSIST)
+    private Set<Reservation> reservations;
 
 }

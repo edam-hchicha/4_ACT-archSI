@@ -23,11 +23,9 @@ public class Reservation {
     @Enumerated(EnumType.STRING)
     private StatutReservation statut;
     @ManyToOne
-    @JoinColumn(name = "id_vehicule")
     private Vehicule vehicule;
     @ManyToOne
-    @JoinColumn(name = "id_client")
     private Client client;
-    @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "reservation", cascade = CascadeType.PERSIST)
     private Contrat contrat;
 }
