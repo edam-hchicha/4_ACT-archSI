@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Service
-@AllArgsConstructor
+
 public class AgenceServiceImpl implements IAgenceService {
 
     private final agenceRepository agenceRepo;
