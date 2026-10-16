@@ -1,5 +1,7 @@
 package tn.esprit.autoloc.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.autoloc.entities.Maintenance;
@@ -7,6 +9,7 @@ import tn.esprit.autoloc.service.interfaces.IMaintenanceService;
 
 import java.util.List;
 
+@Tag(name = "Gestion des Maintenances")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/maintenance")
@@ -14,31 +17,31 @@ public class MaintenanceRestController {
 
     private final IMaintenanceService maintenanceService;
 
-    // GET: http://localhost:8080/maintenance/retrieve-all-maintenances
+    @Operation(description = "Récupérer l'historique des maintenances")
     @GetMapping("/retrieve-all-maintenances")
     public List<Maintenance> retrieveAllMaintenances() {
         return maintenanceService.retrieveAllMaintenances();
     }
 
-    // GET: http://localhost:8080/maintenance/retrieve-maintenance/1
+    @Operation(description = "Récupérer une maintenance par ID")
     @GetMapping("/retrieve-maintenance/{maintenance-id}")
     public Maintenance retrieveMaintenance(@PathVariable("maintenance-id") Long maintenanceId) {
         return maintenanceService.retrieveMaintenance(maintenanceId);
     }
 
-    // POST: http://localhost:8080/maintenance/add-maintenance
+    @Operation(description = "Enregistrer une maintenance")
     @PostMapping("/add-maintenance")
     public Maintenance addMaintenance(@RequestBody Maintenance maintenance) {
         return maintenanceService.addMaintenance(maintenance);
     }
 
-    // PUT: http://localhost:8080/maintenance/update-maintenance
+    @Operation(description = "Mettre à jour une maintenance")
     @PutMapping("/update-maintenance")
     public Maintenance updateMaintenance(@RequestBody Maintenance maintenance) {
         return maintenanceService.updateMaintenance(maintenance);
     }
 
-    // DELETE: http://localhost:8080/maintenance/remove-maintenance/1
+    @Operation(description = "Supprimer une fiche de maintenance")
     @DeleteMapping("/remove-maintenance/{maintenance-id}")
     public void removeMaintenance(@PathVariable("maintenance-id") Long maintenanceId) {
         maintenanceService.removeMaintenance(maintenanceId);
